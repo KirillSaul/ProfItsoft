@@ -9,7 +9,7 @@ public class MainThirdTask {
     public static List<Shape> sortShapes(List<Shape> shapes) {
         return shapes.stream()
                 .filter(Objects::nonNull)
-                .sorted(Comparator.comparingInt(Shape::getVolume))
+                .sorted(Comparator.comparingDouble(Shape::getVolume))
                 .collect(Collectors.toList());
     }
 }

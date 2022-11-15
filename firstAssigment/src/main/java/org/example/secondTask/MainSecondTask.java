@@ -1,10 +1,6 @@
 package org.example.secondTask;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
@@ -12,17 +8,18 @@ import static java.util.Objects.nonNull;
 public class MainSecondTask {
 
     public static LinkedHashMap<String, Integer> countHashTag(List<String> stringsForCount) {
-        Pattern pattern = Pattern.compile("#.+");
-        Matcher matcher;
         Map<String, Integer> map = new LinkedHashMap<>();
+        Set<String> hashTags;
         for (var string : stringsForCount) {
             if (nonNull(string)) {
-                matcher = pattern.matcher(string);
-                while (matcher.find()) {
-                    if (map.containsKey(matcher.group())) {
-                        map.put(matcher.group(), map.get(matcher.group()) + 1);
-                    } else {
-                        map.put(matcher.group(), 1);
+                hashTags = Arrays.stream(string.substring(string.indexOf("#")).split("#")).collect(Collectors.toSet());
+                for (var hashTag : hashTags) {
+                    if (!hashTag.isBlank()) {
+                        if (map.containsKey(hashTag)) {
+                            map.put(hashTag, map.get(hashTag) + 1);
+                        } else {
+                            map.put(hashTag, 1);
+                        }
                     }
                 }
             }
