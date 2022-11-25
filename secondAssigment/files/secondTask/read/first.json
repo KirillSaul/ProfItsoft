@@ -1,0 +1,40 @@
+[
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Ivan",
+    "last_name": "Ivanov",
+    "type": "ALCOHOL",
+    "fine_amount": 3408.00
+  },
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Nastia",
+    "last_name": "Ivanov",
+    "type": "NOISY",
+    "fine_amount": 540.00
+  }
+,
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Aristarh",
+    "last_name": "Ivanov",
+    "type": "SPEEDING",
+    "fine_amount": 5540.00
+  }
+,
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Slavik",
+    "last_name": "Ivanov",
+    "type": "ALCOHOL",
+    "fine_amount": 140.00
+  }
+,
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Arnold",
+    "last_name": "Ivanov",
+    "type": "NOISY",
+    "fine_amount": 840.00
+  }
+]
