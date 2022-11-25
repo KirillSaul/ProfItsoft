@@ -1,0 +1,37 @@
+[
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Olya",
+    "last_name": "Ivanov",
+    "type": "SPEEDING",
+    "fine_amount": 2222.80
+  },
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Ahmed",
+    "last_name": "Ivanov",
+    "type": "NOISY",
+    "fine_amount": 12354.00
+  },
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Olya",
+    "last_name": "Petrov",
+    "type": "NOISY",
+    "fine_amount": 5767.00
+  },
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Nadia",
+    "last_name": "Petrov",
+    "type": "TRAFFIC_LIGHTS",
+    "fine_amount": 5767.00
+  },
+  {
+    "date_time": "2020-05-05 15:39:03",
+    "first_name": "Petia",
+    "last_name": "Petrov",
+    "type": "TRAFFIC_LIGHTS",
+    "fine_amount": 5767.00
+  }
+]
