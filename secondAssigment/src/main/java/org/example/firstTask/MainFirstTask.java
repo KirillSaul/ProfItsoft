@@ -1,15 +1,17 @@
 package org.example.firstTask;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.util.Objects.nonNull;
 
 public class MainFirstTask {
-    public static void replaceToXml(String pathReadFile, String pathWriteFile) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathReadFile));
-             BufferedReader bufferedReader = new BufferedReader(new FileReader(pathWriteFile))
+    public static void replaceToXml(Path pathReadFile, Path pathWriteFile) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathReadFile.toFile()));
+             BufferedReader bufferedReader = new BufferedReader(new FileReader(pathWriteFile.toFile()))
         ) {
             Pattern patternSurname = Pattern.compile("\\ssurname\\s?=\\s?\".+?\"");
             Pattern patternName = Pattern.compile("name\\s?=\\s?\".+?\"");
@@ -52,6 +54,6 @@ public class MainFirstTask {
     }
 
     public static void main(String[] args) {
-        replaceToXml("files/firstTask/writeFile.xml", "files/firstTask/readFile.xml");
+        replaceToXml(Paths.get("files/firstTask/writeFile.xml"), Paths.get("files/firstTask/readFile.xml"));
     }
 }

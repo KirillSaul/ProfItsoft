@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<PoliceProtocolCreator>
+<PoliceProtocol>
   <statistic>
     <TRAFFIC_LIGHTS>111605.0</TRAFFIC_LIGHTS>
     <SPEEDING>67332.8</SPEEDING>
     <NOISY>19501.0</NOISY>
     <ALCOHOL>3548.0</ALCOHOL>
   </statistic>
-</PoliceProtocolCreator>
+</PoliceProtocol>
