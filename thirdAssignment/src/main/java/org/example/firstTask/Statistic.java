@@ -43,14 +43,11 @@ public class Statistic implements Runnable {
     }
 
     public static void setPaths(Path pathRead, Path newPathWrite) {
-
         files = new File(pathRead.toString()).listFiles();
         if (isNull(files)) {
             throw new IllegalArgumentException("can`t find files: " + pathRead);
         }
-
         needCheckFiles = files.length;
-
         pathWrite = newPathWrite;
     }
 
