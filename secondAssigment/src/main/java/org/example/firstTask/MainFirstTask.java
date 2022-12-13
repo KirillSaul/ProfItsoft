@@ -14,7 +14,7 @@ public class MainFirstTask {
              BufferedReader bufferedReader = new BufferedReader(new FileReader(pathWriteFile.toFile()))
         ) {
             Pattern patternSurname = Pattern.compile("\\ssurname\\s?=\\s?\".+?\"");
-            Pattern patternName = Pattern.compile("name\\s?=\\s?\".+?\"");
+            Pattern patternName = Pattern.compile("\\sname\\s?=\\s?\".+?\"");
             Pattern patternEndPerson = Pattern.compile("/>");
 
             Matcher matcherSurname;
@@ -44,12 +44,13 @@ public class MainFirstTask {
                                                 .replaceAll("\"$", " " + saveSurname.concat("\"")))
                         );
                     }
+                    saveSurname="";
                     concatLines = "";
                 }
             }
             bufferedWriter.write(concatLines);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException(e);
         }
     }
 

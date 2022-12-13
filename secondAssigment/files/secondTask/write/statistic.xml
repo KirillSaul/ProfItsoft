@@ -1,9 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<PoliceProtocol>
-  <statistic>
-    <TRAFFIC_LIGHTS>111605.0</TRAFFIC_LIGHTS>
-    <SPEEDING>67332.8</SPEEDING>
-    <NOISY>19501.0</NOISY>
-    <ALCOHOL>3548.0</ALCOHOL>
-  </statistic>
-</PoliceProtocol>
+<Statistic>
+  <item>
+    <type>NOISY</type>
+    <fineAmount>2.8633861908E10</fineAmount>
+  </item>
+  <item>
+    <type>SPEEDING</type>
+    <fineAmount>5.364084649120001E10</fineAmount>
+  </item>
+  <item>
+    <type>TRAFFIC_LIGHTS</type>
+    <fineAmount>5.4805724182E11</fineAmount>
+  </item>
+</Statistic>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Statistic>
+  <item>
+    <type>NOISY</type>
+    <fineAmount>1192561500.00</fineAmount>
+  </item>
+  <item>
+    <type>ALCOHOL</type>
+    <fineAmount>3066092900.00</fineAmount>
+  </item>
+  <item>
+    <type>SPEEDING</type>
+    <fineAmount>4787529500.00</fineAmount>
+  </item>
+  <item>
+    <type>TRAFFIC_LIGHTS</type>
+    <fineAmount>76232162162.00</fineAmount>
+  </item>
+</Statistic>
