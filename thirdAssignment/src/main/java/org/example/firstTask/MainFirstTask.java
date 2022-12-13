@@ -9,21 +9,20 @@ import java.util.concurrent.TimeUnit;
 public class MainFirstTask {
 
     public static void main(String[] arg) throws InterruptedException {
-        Statistic statistic = new Statistic();
-        statistic.setPaths(Paths.get("files/firstTask/read"),
-                Paths.get("files/firstTask/write/statistic.xml"));
+
+        Statistic.setPaths(Paths.get("files/firstTask/read"), Paths.get("files/firstTask/write/statistic.xml"));
 
         int threadQuantity = 8;
         long beginCountDownTime = System.currentTimeMillis();
         ExecutorService executorService = Executors.newFixedThreadPool(threadQuantity);
 
         for (int i = 0; i < threadQuantity; i++) {
-            CompletableFuture.runAsync(statistic, executorService);
+            CompletableFuture.runAsync(new Statistic(), executorService);
         }
         executorService.shutdown();
 
         if (executorService.awaitTermination(7, TimeUnit.HOURS)) {
-            statistic.createStatistic();
+            Statistic.createStatistic();
             System.out.println(System.currentTimeMillis() - beginCountDownTime);
         }
     }

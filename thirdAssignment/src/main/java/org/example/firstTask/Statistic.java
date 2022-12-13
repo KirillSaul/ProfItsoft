@@ -14,32 +14,27 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static java.util.Objects.nonNull;
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 public class Statistic implements Runnable {
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "item")
-    private final List<PoliceProtocol> policeProtocols;
-    private Path pathWrite;
-    private File[] files;
-    private int needCheckFiles;
+    private static final List<PoliceProtocol> policeProtocols = new ArrayList<>();
+    private static Path pathWrite;
+    private static File[] files;
+    private static int needCheckFiles;
 
-    public Statistic() {
-        policeProtocols = Collections.synchronizedList(new ArrayList<>());
-    }
-
-    public void createStatistic() {
+    public static void createStatistic() {
         try {
-            policeProtocols.sort(Comparator.comparing(PoliceProtocol::getFineAmount));
+            policeProtocols.sort(Comparator.comparing(PoliceProtocol::getFineAmount).reversed());
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
             xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-            xmlMapper.writeValue(this.pathWrite.toFile(), Statistic.this);
+            xmlMapper.writeValue(pathWrite.toFile(), policeProtocols);
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         } finally {
@@ -47,7 +42,7 @@ public class Statistic implements Runnable {
         }
     }
 
-    public void setPaths(Path pathRead, Path pathWrite) {
+    public static void setPaths(Path pathRead, Path newPathWrite) {
 
         files = new File(pathRead.toString()).listFiles();
         if (isNull(files)) {
@@ -56,10 +51,10 @@ public class Statistic implements Runnable {
 
         needCheckFiles = files.length;
 
-        this.pathWrite = pathWrite;
+        pathWrite = newPathWrite;
     }
 
-    private synchronized void addToStatistic(PoliceProtocol policeProtocol) {
+    private static synchronized void addToStatistic(PoliceProtocol policeProtocol) {
         if (policeProtocols.contains(policeProtocol)) {
             policeProtocols.get(policeProtocols.indexOf(policeProtocol)).addFineAmount(policeProtocol.getFineAmount());
         } else {
