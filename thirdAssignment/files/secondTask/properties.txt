@@ -1,1 +1,4 @@
-test = 2022-12-11T22:11:27.265852700Z
+dataTimeField = 29.12.2022 18:30
+prefix.intFieldAnnotation = 8
+stringField = my string
+Integer = 50
