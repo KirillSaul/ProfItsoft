@@ -3,8 +3,11 @@ package ua.fourthAssignment.spring.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,12 +29,17 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String checkLogin(@ModelAttribute LoginForm loginForm, HttpServletRequest httpServletRequest) {
-        if (userService.isUserExist(loginForm)) {
+    public String checkLogin(@Valid @ModelAttribute LoginForm loginForm,
+                             BindingResult bindingResult,
+                             Model model,
+                             HttpServletRequest httpServletRequest) {
+        if (!bindingResult.hasErrors() && userService.isUserExist(loginForm)) {
             httpServletRequest.getSession().setAttribute("username", loginForm.getUsername());
             return "redirect:/greeting";
         }
-        return "redirect:/login";
+        bindingResult.reject(String.valueOf(HttpServletResponse.SC_FORBIDDEN), "wrong username or password");
+        model.addAttribute("bindingResult", bindingResult);
+        return "login";
     }
 
     @GetMapping("/logout")

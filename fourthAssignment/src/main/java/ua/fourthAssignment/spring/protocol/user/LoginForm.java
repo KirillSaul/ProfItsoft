@@ -1,9 +1,13 @@
 package ua.fourthAssignment.spring.protocol.user;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.Objects;
 
 public class LoginForm {
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
 
     public String getUsername() {

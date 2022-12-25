@@ -9,49 +9,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86f015c1-5340-45d6-8d8f-f69afc256179" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/config/security/Security.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/controller/GreetingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/controller/UsersController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/protocol/user/LoginForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/protocol/user/LoginFormMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/protocol/user/UserListDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/protocol/user/UserListMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/service/user/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/service/user/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/fragment/head.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/greeting.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/login.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/usersList.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/fragment/head.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/greeting.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/login.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/classes/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/usersList.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/fragment/head.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/greeting.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/login.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/apache-tomcat-10.0.27/webapps/ROOT/WEB-INF/view/usersList.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/fragment/head.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/greeting.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/usersList.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ua/fourthAssignment/spring/protocol/user/LoginFormMapperImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ua/fourthAssignment/spring/protocol/user/UserListMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../thirdAssignment/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../thirdAssignment/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="86f015c1-5340-45d6-8d8f-f69afc256179" name="Changes" comment="fourthAssignment without validation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/security/Security.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/static/assets/css/bootstrap/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/static/assets/js/bootstrap/bootstrap.bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/config/security/Security.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/controller/GreetingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/controller/GreetingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/controller/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/protocol/user/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/protocol/user/LoginForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/service/user/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/fourthAssignment/spring/service/user/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/fragment/head.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/fragment/head.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/usersList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/usersList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ua/fourthAssignment/spring/protocol/user/LoginFormMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ua/fourthAssignment/spring/protocol/user/LoginFormMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ua/fourthAssignment/spring/protocol/user/UserListMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ua/fourthAssignment/spring/protocol/user/UserListMapperImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +41,7 @@
         <option value="spring-beans.schema" />
         <option value="Jsp File" />
         <option value="Interface" />
+        <option value="CSS File" />
         <option value="Class" />
       </list>
     </option>
@@ -98,26 +76,35 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kerich/Desktop/Java/ProfItsoft/fourthAssignment/src/main/resources&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;e032dacb9e76b74dc011ae20d532bea0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/kerich/Desktop/Java/ProfItsoft/fourthAssignment/src/main/resources",
+    "list.type.of.created.stylesheet": "CSS",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "spring.configuration.checksum": "e032dacb9e76b74dc011ae20d532bea0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kerich\Desktop\Java\ProfItsoft\fourthAssignment\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\kerich\Desktop\Java\ProfItsoft\fourthAssignment\src\main\webapp\WEB-INF\view" />
+      <recent name="C:\Users\kerich\Desktop\Java\ProfItsoft\fourthAssignment\src\main\webapp" />
+      <recent name="C:\Users\kerich\Desktop\Java\ProfItsoft\fourthAssignment\src\main" />
+      <recent name="C:\Users\kerich\Desktop\Java\ProfItsoft\fourthAssignment\src\main\webapp\WEB-INF" />
+      <recent name="C:\Users\kerich\Desktop\Java\ProfItsoft\fourthAssignment\src\main\webapp\WEB-INF\resources\static" />
+      <recent name="C:\Users\kerich\Desktop\Java\ProfItsoft\fourthAssignment\src\main\resources\assets\" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ua.fourthAssignment.spring" />
+      <recent name="ua.fourthAssignment.spring.config" />
     </key>
   </component>
   <component name="RunManager">
@@ -227,8 +214,17 @@
       <workItem from="1671784683976" duration="13731000" />
       <workItem from="1671820291367" duration="12405000" />
       <workItem from="1671890097298" duration="5158000" />
-      <workItem from="1671920217186" duration="15322000" />
+      <workItem from="1671920217186" duration="15536000" />
+      <workItem from="1671978943125" duration="20545000" />
     </task>
+    <task id="LOCAL-00001" summary="fourthAssignment without validation">
+      <created>1671936240682</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1671936240682</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,5 +243,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="fourthAssignment without validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="fourthAssignment without validation" />
   </component>
 </project>

@@ -6,7 +6,7 @@ import ua.fourthAssignment.spring.model.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-25T04:39:45+0200",
+    date = "2022-12-25T18:36:34+0200",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.5 (Amazon.com Inc.)"
 )
 @Component

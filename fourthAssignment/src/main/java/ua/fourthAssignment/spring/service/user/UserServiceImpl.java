@@ -2,7 +2,6 @@ package ua.fourthAssignment.spring.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.fourthAssignment.spring.model.User;
 import ua.fourthAssignment.spring.protocol.user.LoginForm;
 import ua.fourthAssignment.spring.protocol.user.LoginFormMapper;
 import ua.fourthAssignment.spring.protocol.user.UserListDto;

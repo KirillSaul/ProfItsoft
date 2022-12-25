@@ -10,8 +10,6 @@
 <html>
 <head>
     <title>UsersList</title>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core"
-              prefix="c" %>
     <%@include file="fragment/head.jsp" %>
 </head>
 <body>
