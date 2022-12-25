@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86f015c1-5340-45d6-8d8f-f69afc256179" name="Changes" comment="fourthAssignment add tomcat">
+    <list default="true" id="86f015c1-5340-45d6-8d8f-f69afc256179" name="Changes" comment="bag fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +71,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "spring.configuration.checksum": "e032dacb9e76b74dc011ae20d532bea0"
   }
 }]]></component>
@@ -92,17 +94,16 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 10.0.27" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.0.27" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="BROWSER_ID" value="53e2f627-b1a7-4dfa-bfa7-5b83cc034776" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="fourthAssignment:war">
           <settings>
-            <option name="CONTEXT_PATH" value="/" />
+            <option name="CONTEXT_PATH" value="" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="594cef23-a833-4b28-b8b9-c8242523a1ef" />
+        <option name="BASE_DIRECTORY_NAME" value="544994b4-5ece-43fe-9491-45f67818ef11" />
         <option name="HTTP_PORT" value="8081" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
@@ -111,7 +112,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="63534" />
+        <option name="DEBUG_PORT" value="59523" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -198,7 +199,7 @@
       <workItem from="1671820291367" duration="12405000" />
       <workItem from="1671890097298" duration="5158000" />
       <workItem from="1671920217186" duration="15536000" />
-      <workItem from="1671978943125" duration="21864000" />
+      <workItem from="1671978943125" duration="23203000" />
     </task>
     <task id="LOCAL-00001" summary="fourthAssignment without validation">
       <created>1671936240682</created>
@@ -214,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672008214844</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="bag fix">
+      <created>1672009225192</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672009225192</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,6 +244,7 @@
     <MESSAGE value="fourthAssignment without validation" />
     <MESSAGE value="fourthAssignment completed" />
     <MESSAGE value="fourthAssignment add tomcat" />
-    <option name="LAST_COMMIT_MESSAGE" value="fourthAssignment add tomcat" />
+    <MESSAGE value="bag fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bag fix" />
   </component>
 </project>

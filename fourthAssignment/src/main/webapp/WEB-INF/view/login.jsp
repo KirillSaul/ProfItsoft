@@ -12,11 +12,11 @@
         <div class="col-auto">
             <div class="row mt-3">
                 <label for="username">Введите логин:</label>
-                <input name="username" id="username" type="text" required>
+                <input name="username" id="username" type="text">
             </div>
             <div class="row mt-3">
                 <label for="password">Введите пароль:</label>
-                <input name="password" id="password" type="password" required>
+                <input name="password" id="password" type="password">
             </div>
             <div class="row mt-3">
                 <button type="submit" class="btn btn-primary">Login</button>
