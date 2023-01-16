@@ -3,10 +3,8 @@ package com.example.fifthAssignment.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.NoSuchElementException;
-
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
-public class NotFoundException extends NoSuchElementException {
+public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {
         super((message));
     }
