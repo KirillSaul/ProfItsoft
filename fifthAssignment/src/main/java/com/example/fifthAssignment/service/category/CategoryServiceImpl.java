@@ -1,5 +1,6 @@
 package com.example.fifthAssignment.service.category;
 
+import com.example.fifthAssignment.controller.NotFoundException;
 import com.example.fifthAssignment.model.Category;
 import com.example.fifthAssignment.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category createCategory(Category category) {
         return categoryRepository.save(category);
+    }
+
+    @Override
+    public Category findCategoryById(Long id) {
+        return categoryRepository.findById(id).orElseThrow(() -> new NotFoundException("can`t find category with id = " + id));
     }
 }

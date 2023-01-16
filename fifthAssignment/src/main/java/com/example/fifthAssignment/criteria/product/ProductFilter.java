@@ -1,33 +1,26 @@
 package com.example.fifthAssignment.criteria.product;
 
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-import static java.util.Objects.nonNull;
-
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class ProductFilter {
     private String productName;
     private Set<Long> categoriesId;
-    private Integer page = 0;
-    private Integer pageSize = 10;
 
-    public ProductFilter(String productName, Set<Long> categoriesId, Integer page, Integer pageSize) {
-        this.productName = productName;
-        this.categoriesId = categoriesId;
-        if (nonNull(page)) {
-            this.page = page;
-        } else {
-            this.page = 0;
-        }
-        if (nonNull(pageSize)) {
-            this.pageSize = pageSize;
-        } else {
-            this.pageSize = 10;
-        }
-    }
+    @NotNull(message = "page number is required")
+    @Min(value = 0,message = "0 is minimum page number")
+    private Integer page;
+
+    @NotNull(message = "page size is required")
+    @Min(value = 10,message = "10 is minimum page size")
+    private Integer pageSize;
 }

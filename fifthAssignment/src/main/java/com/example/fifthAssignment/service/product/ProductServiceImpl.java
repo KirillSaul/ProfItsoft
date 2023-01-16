@@ -1,10 +1,11 @@
 package com.example.fifthAssignment.service.product;
 
+import com.example.fifthAssignment.controller.NotFoundException;
 import com.example.fifthAssignment.criteria.product.ProductFilter;
 import com.example.fifthAssignment.criteria.product.ProductFilterSpecification;
 import com.example.fifthAssignment.model.Product;
-import com.example.fifthAssignment.repository.CategoryRepository;
 import com.example.fifthAssignment.repository.ProductRepository;
+import com.example.fifthAssignment.service.category.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +18,7 @@ import static java.util.Objects.nonNull;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
     @Override
     public Page<Product> findAllProducts(ProductFilter productFilter) {
@@ -26,14 +27,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findProductById(Long id) {
-        return productRepository.findById(id).orElseThrow();
+        return productRepository.findById(id).orElseThrow(() -> new NotFoundException("can`t find product with id = " + id));
     }
 
     @Override
     @Transactional
     public Product createProduct(Product product) {
         if (nonNull(product.getCategory().getId())) {
-            product.setCategory(categoryRepository.findById(product.getCategory().getId()).orElseThrow());
+            product.setCategory(categoryService.findCategoryById(product.getCategory().getId()));
         }
         return productRepository.save(product);
     }
@@ -41,9 +42,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public Product updateProduct(Product newProduct) {
-        Product oldProduct = productRepository.findById(newProduct.getId()).orElseThrow();
+        Product oldProduct = findProductById(newProduct.getId());
         oldProduct.setName(newProduct.getName());
-        oldProduct.setCategory(newProduct.getCategory());
+        oldProduct.setCategory(categoryService.findCategoryById(newProduct.getCategory().getId()));
         return oldProduct;
     }
 

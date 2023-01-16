@@ -20,7 +20,7 @@ public class RunAfterStartup {
         Category category;
         for (int i = 0; i < 20; i++) {
             category = categoryService.createCategory(new Category("Category" + i));
-            productService.createProduct(new Product("product" + i, category));
+            productService.createProduct(new Product("Product" + i, category));
         }
     }
 }
