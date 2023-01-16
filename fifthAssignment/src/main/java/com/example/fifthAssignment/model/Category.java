@@ -10,10 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "categories")
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString(exclude = "products")
+@Data
 @NoArgsConstructor
 public class Category {
     @Id
@@ -26,6 +23,7 @@ public class Category {
         this.name = name;
     }
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "category", orphanRemoval = true)
     @JsonIgnore
     private List<Product> products;
