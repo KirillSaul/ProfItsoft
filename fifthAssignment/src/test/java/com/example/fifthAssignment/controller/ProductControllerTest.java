@@ -40,7 +40,6 @@ class ProductControllerTest {
     private ObjectMapper objectMapper;
     @Autowired
     private ProductService productService;
-
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -116,7 +115,7 @@ class ProductControllerTest {
         Product product = productService.createProduct(new Product("Car", category));
         mockMvc.perform(delete("/product/" + product.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        assertThrows(NotFoundException.class,() -> productService.findProductById(product.getId()));
+        assertThrows(NotFoundException.class, () -> productService.findProductById(product.getId()));
     }
 
     private <T> T parseResponse(MvcResult mvcResult, Class<T> c) {
