@@ -23,8 +23,8 @@ public class ProductFilterSpecification implements Specification<Product> {
         if (nonNull(productFilter.getProductName())) {
             predicateList.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("name")), "%"+ productFilter.getProductName().toUpperCase()+"%"));
         }
-        if (nonNull(productFilter.getCategoriesId()) && !productFilter.getCategoriesId().isEmpty()) {
-            predicateList.add(criteriaBuilder.in(root.get("category").get("id")).value(productFilter.getCategoriesId()));
+        if (nonNull(productFilter.getCategoryIds()) && !productFilter.getCategoryIds().isEmpty()) {
+            predicateList.add(criteriaBuilder.in(root.get("category").get("id")).value(productFilter.getCategoryIds()));
         }
         return criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
     }

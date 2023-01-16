@@ -1,6 +1,6 @@
 package com.example.fifthAssignment.service.product;
 
-import com.example.fifthAssignment.controller.NotFoundException;
+import com.example.fifthAssignment.exception.NotFoundException;
 import com.example.fifthAssignment.criteria.product.ProductFilter;
 import com.example.fifthAssignment.criteria.product.ProductFilterSpecification;
 import com.example.fifthAssignment.model.Product;

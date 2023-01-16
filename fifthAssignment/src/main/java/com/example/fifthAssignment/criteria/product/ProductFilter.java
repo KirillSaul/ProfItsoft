@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 public class ProductFilter {
     private String productName;
-    private Set<Long> categoriesId;
+    private Set<Long> categoryIds;
 
     @NotNull(message = "page number is required")
     @Min(value = 0,message = "0 is minimum page number")

@@ -1,12 +1,15 @@
 package com.example.fifthAssignment.controller;
 
 import com.example.fifthAssignment.FifthAssignmentApplication;
+import com.example.fifthAssignment.exception.NotFoundException;
 import com.example.fifthAssignment.model.Category;
 import com.example.fifthAssignment.model.Product;
 import com.example.fifthAssignment.repository.CategoryRepository;
+import com.example.fifthAssignment.service.category.CategoryService;
 import com.example.fifthAssignment.service.product.ProductService;
 import com.example.fifthAssignment.utility.RunAfterStartup;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -14,12 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -42,6 +49,8 @@ class ProductControllerTest {
     private ProductService productService;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private CategoryService categoryService;
 
     @AfterEach
     public void afterEach() {
@@ -49,7 +58,45 @@ class ProductControllerTest {
     }
 
     @Test
-    void findProductsByNameAndCategory() {
+    void productFilter() throws Exception {
+        List<Category> categories = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            categories.add(categoryService.createCategory(new Category("Category" + i)));
+            productService.createProduct(new Product("Product" + i, categories.get(i)));
+        }
+
+        int pageSize = 10;
+        int page = 0;
+        String bodyPageSizeAndPageNumber = """
+                {
+                    "pageSize": %d,
+                    "page": %d
+                }
+                """.formatted(pageSize, page);
+
+        mockMvc.perform(post("/product/_filter").contentType(MediaType.APPLICATION_JSON).content(bodyPageSizeAndPageNumber))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content", hasSize(10)))
+                .andExpect(jsonPath("$.pageable.pageNumber", is(0)))
+                .andExpect(jsonPath("$.totalPages", is(2)));
+
+
+        productService.createProduct(new Product("car", categoryService.findCategoryById(categories.get(0).getId())));
+        productService.createProduct(new Product("care", categoryService.findCategoryById(categories.get(1).getId())));
+        String productName = "car";
+        List<Long> categoryIds = List.of(categories.get(0).getId(), categories.get(1).getId());
+        String fullFilter = """
+                {
+                    "productName": "%s",
+                    "categoryIds": %s,
+                    "pageSize": %d,
+                    "page": %d
+                }
+                """.formatted(productName, categoryIds, pageSize, page);
+        mockMvc.perform(post("/product/_filter").contentType(MediaType.APPLICATION_JSON).content(fullFilter))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].name", is("car")))
+                .andExpect(jsonPath("$.content[1].name", is("care")));
     }
 
     @Test

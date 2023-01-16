@@ -16,7 +16,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/_filter")
-    public Page<Product> findProductsByNameAndCategory(@Valid @RequestBody ProductFilter productFilter) {
+    public Page<Product> productFilter(@Valid @RequestBody ProductFilter productFilter) {
         return productService.findAllProducts(productFilter);
     }
 

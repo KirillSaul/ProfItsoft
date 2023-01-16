@@ -26,7 +26,7 @@ public class Category {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "category",orphanRemoval = true)
+    @OneToMany(mappedBy = "category", orphanRemoval = true)
     @JsonIgnore
     private List<Product> products;
 }

@@ -59,14 +59,14 @@ class CategoryControllerTest {
         MvcResult mvcResult = mockMvc.perform(get("/category").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn();
 
-        List<Category> categoriesAfterSave = parseCategoryListResponse(mvcResult);
+        List<Category> categoriesAfterSave = parseListResponse(mvcResult);
         assertEquals(categoriesBeforeSave.size(), categoriesAfterSave.size());
         for (int i = 0; i < categoriesBeforeSave.size(); i++) {
             assertEquals(categoriesBeforeSave.get(i).getName(), categoriesAfterSave.get(i).getName());
         }
     }
 
-    private List<Category> parseCategoryListResponse(MvcResult mvcResult) {
+    private List<Category> parseListResponse(MvcResult mvcResult) {
         try {
             return objectMapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<>() {
             });

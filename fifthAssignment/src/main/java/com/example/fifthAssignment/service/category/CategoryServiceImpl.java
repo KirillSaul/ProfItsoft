@@ -1,6 +1,6 @@
 package com.example.fifthAssignment.service.category;
 
-import com.example.fifthAssignment.controller.NotFoundException;
+import com.example.fifthAssignment.exception.NotFoundException;
 import com.example.fifthAssignment.model.Category;
 import com.example.fifthAssignment.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
