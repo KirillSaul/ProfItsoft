@@ -2,6 +2,7 @@ package com.example.fifthAssignment.utility;
 
 import com.example.fifthAssignment.model.Category;
 import com.example.fifthAssignment.model.Product;
+import com.example.fifthAssignment.service.category.CategoryService;
 import com.example.fifthAssignment.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -11,12 +12,15 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class RunAfterStartup {
-    final private ProductService productService;
+    private final ProductService productService;
+    private final CategoryService categoryService;
 
     @EventListener(ApplicationReadyEvent.class)
-    public void runAfterStartup() {
+    public void fillDataBase() {
+        Category category;
         for (int i = 0; i < 20; i++) {
-            productService.createProduct(new Product("product" + i, new Category("Category" + i)));
+            category = categoryService.createCategory(new Category("Category" + i));
+            productService.createProduct(new Product("product" + i, category));
         }
     }
 }

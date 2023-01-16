@@ -16,13 +16,13 @@ public class Product {
     private Long id;
     private String name;
 
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
     public Product(String name, Category category) {
         this.name = name;
         this.category = category;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id")
-    private Category category;
 
 }

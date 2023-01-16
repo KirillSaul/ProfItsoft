@@ -1,22 +1,17 @@
 package com.example.fifthAssignment.service.product;
 
+import com.example.fifthAssignment.criteria.product.ProductFilter;
 import com.example.fifthAssignment.model.Product;
-
-import java.awt.print.Pageable;
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface ProductService {
-    List<Product> findAllProducts(Pageable pageable);
-
-    Product findProductByName(String id, Pageable pageable);
-
-    Product findProductByCategoryId(Long id, Pageable pageable);
+    Page<Product> findAllProducts(ProductFilter productFilter);
 
     Product findProductById(Long id);
 
     Product createProduct(Product product);
 
-    Product updateProduct(Product product);
+    Product updateProduct(Product newProduct);
 
-    Product deleteProductById(Long id);
+    void deleteProductById(Long id);
 }
