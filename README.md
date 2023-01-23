@@ -1,3 +1,5 @@
+# FifthAssignment
+open-api: /api-docs
 # FourthAssignment
 ## Run project:
 In navbar choose "Run"->Edit configurations->"+"->Tomcat Server->local:
