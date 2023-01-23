@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ProductViewDto> findAllProductsViewDto(ProductFilter productFilter) {
+    public Page<ProductViewDto> findAllByFilterProductsViewDto(ProductFilter productFilter) {
         return productRepository
                 .findAll(new ProductFilterSpecification(productFilter), PageRequest.of(productFilter.getPage(), productFilter.getPageSize()))
                 .map(productViewMapper::toProductViewDto);

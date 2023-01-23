@@ -7,7 +7,7 @@ import com.example.fifthAssignment.protocol.product.ProductViewDto;
 import org.springframework.data.domain.Page;
 
 public interface ProductService {
-    Page<ProductViewDto> findAllProductsViewDto(ProductFilter productFilter);
+    Page<ProductViewDto> findAllByFilterProductsViewDto(ProductFilter productFilter);
 
     ProductViewDto findProductViewDtoById(Long id);
 

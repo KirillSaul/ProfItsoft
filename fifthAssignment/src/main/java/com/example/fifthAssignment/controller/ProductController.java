@@ -19,7 +19,7 @@ public class ProductController {
 
     @PostMapping("/_filter")
     public Page<ProductViewDto> productFilter(@Valid @RequestBody ProductFilter productFilter) {
-        return productService.findAllProductsViewDto(productFilter);
+        return productService.findAllByFilterProductsViewDto(productFilter);
     }
 
     @GetMapping("/{id}")
