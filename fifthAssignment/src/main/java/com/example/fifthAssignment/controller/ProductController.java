@@ -1,7 +1,9 @@
 package com.example.fifthAssignment.controller;
 
-import com.example.fifthAssignment.criteria.product.ProductFilter;
-import com.example.fifthAssignment.model.Product;
+import com.example.fifthAssignment.protocol.product.ProductCreateDto;
+import com.example.fifthAssignment.protocol.product.ProductFilter;
+import com.example.fifthAssignment.protocol.product.ProductUpdateDto;
+import com.example.fifthAssignment.protocol.product.ProductViewDto;
 import com.example.fifthAssignment.service.product.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,24 +18,24 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/_filter")
-    public Page<Product> productFilter(@Valid @RequestBody ProductFilter productFilter) {
-        return productService.findAllProducts(productFilter);
+    public Page<ProductViewDto> productFilter(@Valid @RequestBody ProductFilter productFilter) {
+        return productService.findAllProductsViewDto(productFilter);
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) {
-        return productService.findProductById(id);
+    public ProductViewDto getProductById(@PathVariable Long id) {
+        return productService.findProductViewDtoById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Product createProduct(@Valid @RequestBody Product product) {
-        return productService.createProduct(product);
+    public ProductViewDto createProduct(@Valid @RequestBody ProductCreateDto productCreateDto) {
+        return productService.createProduct(productCreateDto);
     }
 
     @PutMapping
-    public Product updateProduct(@Valid @RequestBody Product product) {
-        return productService.updateProduct(product);
+    public ProductViewDto updateProduct(@Valid @RequestBody ProductUpdateDto productUpdateDto) {
+        return productService.updateProduct(productUpdateDto);
     }
 
     @DeleteMapping("/{id}")

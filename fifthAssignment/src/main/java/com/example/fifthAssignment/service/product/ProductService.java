@@ -1,17 +1,19 @@
 package com.example.fifthAssignment.service.product;
 
-import com.example.fifthAssignment.criteria.product.ProductFilter;
-import com.example.fifthAssignment.model.Product;
+import com.example.fifthAssignment.protocol.product.ProductCreateDto;
+import com.example.fifthAssignment.protocol.product.ProductFilter;
+import com.example.fifthAssignment.protocol.product.ProductUpdateDto;
+import com.example.fifthAssignment.protocol.product.ProductViewDto;
 import org.springframework.data.domain.Page;
 
 public interface ProductService {
-    Page<Product> findAllProducts(ProductFilter productFilter);
+    Page<ProductViewDto> findAllProductsViewDto(ProductFilter productFilter);
 
-    Product findProductById(Long id);
+    ProductViewDto findProductViewDtoById(Long id);
 
-    Product createProduct(Product product);
+    ProductViewDto createProduct(ProductCreateDto productCreateDto);
 
-    Product updateProduct(Product newProduct);
+    ProductViewDto updateProduct(ProductUpdateDto productUpdateDto);
 
     void deleteProductById(Long id);
 }

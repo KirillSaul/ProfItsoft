@@ -16,7 +16,6 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "name is required")
     private String name;
 
     public Category(String name) {
@@ -25,6 +24,5 @@ public class Category {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "category", orphanRemoval = true)
-    @JsonIgnore
     private List<Product> products;
 }

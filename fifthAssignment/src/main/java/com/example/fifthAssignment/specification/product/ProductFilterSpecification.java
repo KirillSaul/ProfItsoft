@@ -1,6 +1,7 @@
-package com.example.fifthAssignment.criteria.product;
+package com.example.fifthAssignment.specification.product;
 
 import com.example.fifthAssignment.model.Product;
+import com.example.fifthAssignment.protocol.product.ProductFilter;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;

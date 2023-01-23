@@ -1,6 +1,6 @@
 package com.example.fifthAssignment.controller;
 
-import com.example.fifthAssignment.model.Category;
+import com.example.fifthAssignment.protocol.category.CategoryViewDto;
 import com.example.fifthAssignment.service.category.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public List<Category> getAllCategories() {
-        return categoryService.findAllCategories();
+    public List<CategoryViewDto> getAllCategories() {
+        return categoryService.findAllCategoriesViewDto();
     }
 }

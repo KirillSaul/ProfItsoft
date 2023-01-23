@@ -1,7 +1,7 @@
 package com.example.fifthAssignment.utility;
 
 import com.example.fifthAssignment.model.Category;
-import com.example.fifthAssignment.model.Product;
+import com.example.fifthAssignment.protocol.product.ProductCreateDto;
 import com.example.fifthAssignment.service.category.CategoryService;
 import com.example.fifthAssignment.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class RunAfterStartup {
         Category category;
         for (int i = 0; i < 20; i++) {
             category = categoryService.createCategory(new Category("Category" + i));
-            productService.createProduct(new Product("Product" + i, category));
+            productService.createProduct(new ProductCreateDto("Product" + i, category.getId()));
         }
     }
 }

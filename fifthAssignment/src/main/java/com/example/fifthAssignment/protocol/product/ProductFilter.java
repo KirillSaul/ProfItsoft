@@ -1,4 +1,4 @@
-package com.example.fifthAssignment.criteria.product;
+package com.example.fifthAssignment.protocol.product;
 
 
 import jakarta.validation.constraints.Min;
