@@ -5,6 +5,7 @@ import com.example.fifthAssignment.exception.NotFoundException;
 import com.example.fifthAssignment.model.Category;
 import com.example.fifthAssignment.model.Product;
 import com.example.fifthAssignment.protocol.product.ProductCreateDto;
+import com.example.fifthAssignment.protocol.product.ProductUpdateDto;
 import com.example.fifthAssignment.protocol.product.ProductViewDto;
 import com.example.fifthAssignment.repository.CategoryRepository;
 import com.example.fifthAssignment.service.category.CategoryService;
@@ -146,15 +147,14 @@ class ProductControllerTest {
         ProductViewDto productViewDtoForUpdate = productService.findProductViewDtoById(oldProduct.getId());
         productViewDtoForUpdate.setCategoryId(categoryForUpdate.getId());
         productViewDtoForUpdate.setName("Toy");
-
         MvcResult mvcResult = mockMvc.perform(put("/product").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(productViewDtoForUpdate)))
                 .andExpect(status().isOk()).andReturn();
 
-        ProductViewDto product = parseResponse(mvcResult, ProductViewDto.class);
-        assertEquals(product.getId(), productViewDtoForUpdate.getId());
-        assertEquals(product.getName(), productViewDtoForUpdate.getName());
-        assertEquals(product.getCategoryId(), categoryForUpdate.getId());
+        ProductUpdateDto productUpdateDto = parseResponse(mvcResult, ProductUpdateDto.class);
+        assertEquals(productUpdateDto.getId(), productViewDtoForUpdate.getId());
+        assertEquals(productUpdateDto.getName(), productViewDtoForUpdate.getName());
+        assertEquals(productUpdateDto.getCategoryId(), categoryForUpdate.getId());
     }
 
 

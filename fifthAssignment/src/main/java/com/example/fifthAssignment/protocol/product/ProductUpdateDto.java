@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class ProductUpdateDto {
-    @NotBlank(message = "id is required")
+    @NotNull(message = "id is required")
     private Long id;
     @NotBlank(message = "name is required")
     private String name;
