@@ -1,7 +1,7 @@
 import React from 'react';
 import CalculatorButton from "./CalculatorButton";
 import CalculatorOutput from "./CalculatorOutput";
-import {Grid} from "@material-ui/core";
+import {Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
 
 class Calculator extends React.Component {
     constructor(props) {
@@ -101,9 +101,7 @@ class Calculator extends React.Component {
 
     render() {
         return <div>
-            <Grid>
-                {this.state.history}
-            </Grid>
+            {this.state.history.map((value) => <Grid>{value}</Grid>)}
             <Grid>
                 <CalculatorOutput output={this.state.output}/>
             </Grid>
