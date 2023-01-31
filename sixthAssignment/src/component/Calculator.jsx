@@ -1,7 +1,7 @@
 import React from 'react';
 import CalculatorButton from "./CalculatorButton";
 import CalculatorOutput from "./CalculatorOutput";
-import {Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 
 class Calculator extends React.Component {
     constructor(props) {
@@ -16,28 +16,31 @@ class Calculator extends React.Component {
         }
     }
 
-    changeOutput = (buttonName) => {
+    buttonClick = (buttonName) => {
         if (this.state.output === 0 && this.state.firstNumber === null) {
             this.setState({output: ""})
         }
-        this.addOutputValue(buttonName)
-
-
-        if (buttonName >= "0" && buttonName <= "9") {
-            if (this.state.operation === null) {
-                this.setFirstNumber(buttonName)
-            } else {
-                this.setSecondNumber(buttonName)
-            }
-
-        } else {
-            if (buttonName === "=") {
-                this.count();
-            } else {
-                if (this.state.secondNumber === null) {
-                    this.setState({operation: buttonName});
+        if ((buttonName === "=" && this.state.secondNumber !== null) || buttonName !== "=") {
+            if (buttonName >= "0" && buttonName <= "9") {
+                if (this.state.operation === null) {
+                    this.setFirstNumber(buttonName)
                 } else {
+                    this.setSecondNumber(buttonName)
+                }
+                this.addOutputValue(buttonName)
+
+            } else {
+                this.setState({operation: buttonName});
+                if (buttonName === "=" || this.state.secondNumber !== null) {
                     this.count();
+                } else if (this.state.operation !== null) {
+                    this.setState((state) => (
+                        {
+                            output: state.output.substring(0, state.output.length - 1) + buttonName
+                        }
+                    ));
+                } else {
+                    this.addOutputValue(buttonName)
                 }
             }
         }
@@ -61,22 +64,34 @@ class Calculator extends React.Component {
     }
 
     addHistory() {
-        this.setState((state) => ({history: this.state.history.concat(state.output + state.result)}));
-    }
-
-    refreshState() {
         this.setState((state) => (
             {
-                firstNumber: state.result,
-                secondNumber: null,
-                operation: null,
-                result: null,
+                history: this.state.history.concat(state.output + "=" + state.result)
             }
         ));
     }
 
-    refreshOutput() {
-        this.setState((state) => ({output: state.result}));
+    refreshState() {
+        this.setState((state) => {
+                const commonState = {
+                    firstNumber: state.result,
+                    secondNumber: null,
+                    result: null
+                }
+                if (state.operation !== "=") {
+                    return {
+                        output: state.result + state.operation,
+                        ...commonState
+                    }
+                } else {
+                    return {
+                        output: state.result,
+                        operation: null,
+                        ...commonState
+                    }
+                }
+            }
+        );
     }
 
     count() {
@@ -95,40 +110,39 @@ class Calculator extends React.Component {
                 break;
         }
         this.addHistory();
-        this.refreshOutput();
         this.refreshState();
     }
 
     render() {
         return <div>
-            {this.state.history.map((value) => <Grid>{value}</Grid>)}
+            {this.state.history.map((value, index) => <Grid key={index}>{value}</Grid>)}
             <Grid>
                 <CalculatorOutput output={this.state.output}/>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="+" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="-" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="*" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="/" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="=" changeOutput={this.changeOutput}/>
+                <CalculatorButton buttonName="+" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="-" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="*" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="/" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="=" buttonClick={this.buttonClick}/>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="7" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="8" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="9" changeOutput={this.changeOutput}/>
+                <CalculatorButton buttonName="7" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="8" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="9" buttonClick={this.buttonClick}/>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="4" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="5" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="6" changeOutput={this.changeOutput}/>
+                <CalculatorButton buttonName="4" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="5" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="6" buttonClick={this.buttonClick}/>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="1" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="2" changeOutput={this.changeOutput}/>
-                <CalculatorButton buttonName="3" changeOutput={this.changeOutput}/>
+                <CalculatorButton buttonName="1" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="2" buttonClick={this.buttonClick}/>
+                <CalculatorButton buttonName="3" buttonClick={this.buttonClick}/>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="0" changeOutput={this.changeOutput}/>
+                <CalculatorButton buttonName="0" buttonClick={this.buttonClick}/>
             </Grid>
         </div>
     }
