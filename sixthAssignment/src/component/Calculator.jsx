@@ -1,11 +1,18 @@
 import React from 'react';
-import CalculatorButton from "./CalculatorButton";
+import ButtonNumber from "./ButtonNumber";
 import {Box, Grid} from "@material-ui/core";
 import CalculatorOutput from "./CalculatorOutput";
+import OutsideButton from "./OutsideButton";
+import ButtonOperation from "./ButtonOperation";
+import ButtonResult from "./ButtonResult";
 
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
+        this.outsideButtonClick = this.outsideButtonClick.bind(this);
+        this.buttonNumberClick = this.buttonNumberClick.bind(this);
+        this.buttonOperationClick = this.buttonOperationClick.bind(this);
+        this.buttonResultClick = this.buttonResultClick.bind(this);
         this.state = {
             output: 0,
             firstNumber: null,
@@ -16,41 +23,65 @@ class Calculator extends React.Component {
         }
     }
 
-    buttonClick = (buttonName) => {
+    async buttonNumberClick(buttonName) {
         if (this.state.output === 0 && this.state.firstNumber === null) {
-            this.setState({output: ""})
+            await this.setState({output: ""})
         }
-        if ((buttonName === "=" && this.state.secondNumber !== null) || buttonName !== "=") {
-            if (buttonName >= "0" && buttonName <= "9") {
-                if (this.state.operation === null) {
-                    this.setFirstNumber(buttonName)
-                } else {
-                    this.setSecondNumber(buttonName)
+        if (this.state.operation === null) {
+            await this.addFirstNumber(buttonName)
+        } else {
+            await this.addSecondNumber(buttonName)
+        }
+        await this.addOutputValue(buttonName)
+    }
+
+    async buttonOperationClick(buttonName) {
+        if (this.state.secondNumber !== null) {
+            await this.count(buttonName);
+        } else if (this.state.operation !== null) {
+            await this.setState((state) => (
+                {
+                    output: state.output.substring(0, state.output.length - 1) + buttonName
                 }
-                this.addOutputValue(buttonName)
-            } else {
-                this.setState({operation: buttonName});
-                if (buttonName === "=" || this.state.secondNumber !== null) {
-                    this.count();
-                } else if (this.state.operation !== null) {
-                    this.setState((state) => (
-                        {
-                            output: state.output.substring(0, state.output.length - 1) + buttonName
-                        }
-                    ));
-                } else {
-                    this.addOutputValue(buttonName)
-                }
-            }
+            ));
+        } else {
+            await this.setOperation(buttonName)
+            await this.addOutputValue(buttonName)
         }
     }
 
-    setFirstNumber(number) {
+    async buttonResultClick() {
+        await this.count("=");
+    }
+
+    async outsideButtonClick() {
+        const test = ["2+2", "2/0", "6-7", "42*42"]
+        for (let r of test) {
+            for (let symbol of r) {
+                if (symbol >= "0" && symbol <= "9") {
+                    await this.buttonNumberClick(symbol)
+                }else {
+                    await this.buttonOperationClick(symbol)
+                }
+
+            }
+            await this.buttonResultClick()
+            await this.setState({firstNumber: null});
+            await this.setOperation(null)
+            await this.setState({output: ""});
+        }
+    }
+
+    addFirstNumber(number) {
         this.setState((state) => ({firstNumber: Number(state.firstNumber) + number}));
     }
 
-    setSecondNumber(number) {
+    addSecondNumber(number) {
         this.setState((state) => ({secondNumber: Number(state.secondNumber) + number}));
+    }
+
+    setOperation(operation) {
+        this.setState({operation: operation});
     }
 
     setResult(value) {
@@ -70,16 +101,17 @@ class Calculator extends React.Component {
         ));
     }
 
-    refreshState() {
+    refreshState(operation) {
         this.setState((state) => {
                 const commonState = {
                     firstNumber: state.result,
                     secondNumber: null,
                     result: null
                 }
-                if (state.operation !== "=") {
+                if (operation !== "=") {
                     return {
-                        output: state.result + state.operation,
+                        operation: operation,
+                        output: state.result + operation,
                         ...commonState
                     }
                 } else {
@@ -93,23 +125,27 @@ class Calculator extends React.Component {
         );
     }
 
-    count() {
+    async count(operation) {
         switch (this.state.operation) {
             case "+":
-                this.setResult(Number(this.state.firstNumber) + Number(this.state.secondNumber))
+                await this.setResult(Number(this.state.firstNumber) + Number(this.state.secondNumber))
                 break;
             case "-":
-                this.setResult(Number(this.state.firstNumber) - Number(this.state.secondNumber))
+                await this.setResult(Number(this.state.firstNumber) - Number(this.state.secondNumber))
                 break;
             case "*":
-                this.setResult(Number(this.state.firstNumber) * Number(this.state.secondNumber))
+                await this.setResult(Number(this.state.firstNumber) * Number(this.state.secondNumber))
                 break;
             case "/":
-                this.setResult(Number(this.state.firstNumber) / Number(this.state.secondNumber))
+                if (Number(this.state.secondNumber) === 0) {
+                    await this.setResult("Error division by zero")
+                } else {
+                    await this.setResult(Number(this.state.firstNumber) / Number(this.state.secondNumber))
+                }
                 break;
         }
-        this.addHistory();
-        this.refreshState();
+        await this.addHistory();
+        await this.refreshState(operation);
     }
 
     render() {
@@ -120,7 +156,7 @@ class Calculator extends React.Component {
                             if (index === (this.state.history.length - 1)) {
                                 return (
                                     <Grid key={index}>
-                                        <Box fontWeight="fontWeightBold" m={1}>
+                                        <Box fontWeight="fontWeightBold">
                                             {value}
                                         </Box>
                                     </Grid>
@@ -136,29 +172,34 @@ class Calculator extends React.Component {
                 <CalculatorOutput output={this.state.output}></CalculatorOutput>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="+" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="-" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="*" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="/" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="=" buttonClick={this.buttonClick}/>
+                <ButtonOperation buttonName="+" onClick={this.buttonOperationClick}/>
+                <ButtonOperation buttonName="-" onClick={this.buttonOperationClick}/>
+                <ButtonOperation buttonName="*" onClick={this.buttonOperationClick}/>
+                <ButtonOperation buttonName="/" onClick={this.buttonOperationClick}/>
+                <ButtonResult buttonName="=" onClick={this.buttonResultClick}/>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="7" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="8" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="9" buttonClick={this.buttonClick}/>
+                <ButtonNumber buttonName="7" onClick={this.buttonNumberClick}/>
+                <ButtonNumber buttonName="8" onClick={this.buttonNumberClick}/>
+                <ButtonNumber buttonName="9" onClick={this.buttonNumberClick}/>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="4" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="5" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="6" buttonClick={this.buttonClick}/>
+                <ButtonNumber buttonName="4" onClick={this.buttonNumberClick}/>
+                <ButtonNumber buttonName="5" onClick={this.buttonNumberClick}/>
+                <ButtonNumber buttonName="6" onClick={this.buttonNumberClick}/>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="1" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="2" buttonClick={this.buttonClick}/>
-                <CalculatorButton buttonName="3" buttonClick={this.buttonClick}/>
+                <ButtonNumber buttonName="1" onClick={this.buttonNumberClick}/>
+                <ButtonNumber buttonName="2" onClick={this.buttonNumberClick}/>
+                <ButtonNumber buttonName="3" onClick={this.buttonNumberClick}/>
             </Grid>
             <Grid>
-                <CalculatorButton buttonName="0" buttonClick={this.buttonClick}/>
+                <ButtonNumber buttonName="0" onClick={this.buttonNumberClick}/>
+            </Grid>
+            <Grid>
+                <Box mt={3}>
+                    <OutsideButton buttonName="Получить и решить примеры" onClick={this.outsideButtonClick}/>
+                </Box>
             </Grid>
         </div>
     }
