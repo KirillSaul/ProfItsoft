@@ -1,9 +1,8 @@
-import {TextField} from "@material-ui/core";
 import React from 'react';
 
 class CalculatorOutput extends React.Component {
     render() {
-        return <TextField value={this.props.output}></TextField>
+        return <div>{this.props.output}</div>
     }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import CalculatorButton from "./CalculatorButton";
-import CalculatorOutput from "./CalculatorOutput";
 import {Box, Grid} from "@material-ui/core";
+import CalculatorOutput from "./CalculatorOutput";
 
 class Calculator extends React.Component {
     constructor(props) {
@@ -28,7 +28,6 @@ class Calculator extends React.Component {
                     this.setSecondNumber(buttonName)
                 }
                 this.addOutputValue(buttonName)
-
             } else {
                 this.setState({operation: buttonName});
                 if (buttonName === "=" || this.state.secondNumber !== null) {
@@ -115,24 +114,26 @@ class Calculator extends React.Component {
 
     render() {
         return <div>
-            {
-                this.state.history.map((value, index) => {
-                        if (index === (this.state.history.length - 1)) {
-                            return (
-                                <Grid key={index}>
-                                    <Box fontWeight="fontWeightBold" m={1}>
-                                        {value}
-                                    </Box>
-                                </Grid>
-                            )
-                        } else {
-                            return <Grid key={index}>{value}</Grid>
+            <div>
+                {
+                    this.state.history.map((value, index) => {
+                            if (index === (this.state.history.length - 1)) {
+                                return (
+                                    <Grid key={index}>
+                                        <Box fontWeight="fontWeightBold" m={1}>
+                                            {value}
+                                        </Box>
+                                    </Grid>
+                                )
+                            } else {
+                                return <Grid key={index}>{value}</Grid>
+                            }
                         }
-                    }
-                )
-            }
+                    )
+                }
+            </div>
             <Grid>
-                <CalculatorOutput output={this.state.output}/>
+                <CalculatorOutput output={this.state.output}></CalculatorOutput>
             </Grid>
             <Grid>
                 <CalculatorButton buttonName="+" buttonClick={this.buttonClick}/>
