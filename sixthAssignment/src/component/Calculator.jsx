@@ -55,20 +55,25 @@ class Calculator extends React.Component {
     }
 
     async outsideButtonClick() {
-        const test = ["2+2", "2/0", "6-7", "42*42"]
-        for (let r of test) {
-            for (let symbol of r) {
-                if (symbol >= "0" && symbol <= "9") {
-                    await this.buttonNumberClick(symbol)
-                }else {
-                    await this.buttonOperationClick(symbol)
+        const response = await fetch("http://localhost:8081/math/expamples?count=5", {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        });
+        if (response.ok) {
+            const examples = await response.json()
+            for (let example of examples) {
+                for (let symbol of example) {
+                    if (symbol >= "0" && symbol <= "9") {
+                        await this.buttonNumberClick(symbol)
+                    } else {
+                        await this.buttonOperationClick(symbol)
+                    }
                 }
-
+                await this.buttonResultClick()
+                await this.setState({firstNumber: null});
+                await this.setOperation(null)
+                await this.setState({output: ""});
             }
-            await this.buttonResultClick()
-            await this.setState({firstNumber: null});
-            await this.setOperation(null)
-            await this.setState({output: ""});
         }
     }
 
