@@ -1,7 +1,7 @@
 import React from 'react';
 import CalculatorButton from "./CalculatorButton";
 import CalculatorOutput from "./CalculatorOutput";
-import {Grid} from "@material-ui/core";
+import {Box, Grid} from "@material-ui/core";
 
 class Calculator extends React.Component {
     constructor(props) {
@@ -115,7 +115,22 @@ class Calculator extends React.Component {
 
     render() {
         return <div>
-            {this.state.history.map((value, index) => <Grid key={index}>{value}</Grid>)}
+            {
+                this.state.history.map((value, index) => {
+                        if (index === (this.state.history.length - 1)) {
+                            return (
+                                <Grid key={index}>
+                                    <Box fontWeight="fontWeightBold" m={1}>
+                                        {value}
+                                    </Box>
+                                </Grid>
+                            )
+                        } else {
+                            return <Grid key={index}>{value}</Grid>
+                        }
+                    }
+                )
+            }
             <Grid>
                 <CalculatorOutput output={this.state.output}/>
             </Grid>
