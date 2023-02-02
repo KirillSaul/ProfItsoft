@@ -14,49 +14,50 @@ class Calculator extends React.Component {
         this.buttonOperationClick = this.buttonOperationClick.bind(this);
         this.buttonResultClick = this.buttonResultClick.bind(this);
         this.state = {
-            output: 0,
-            firstNumber: null,
-            secondNumber: null,
-            operation: null,
+            output: "0",
+            firstNumber: "",
+            secondNumber: "",
+            operation: "",
             result: null,
             history: [],
         }
     }
 
-    async buttonNumberClick(buttonName) {
-        if (this.state.output === 0 && this.state.firstNumber === null) {
-            await this.setState({output: ""})
-        }
-        if (this.state.operation === null) {
-            await this.addFirstNumber(buttonName)
+    buttonNumberClick(buttonName) {
+        const updateOutput = {output: this.state.output + buttonName}
+        if (this.state.operation === "") {
+            const updateFirstNumber = {firstNumber: this.state.firstNumber + buttonName};
+            if (this.state.output === "0" && this.state.firstNumber === "") {
+                this.refreshState({output: buttonName, ...updateFirstNumber})
+            } else {
+                this.refreshState({...updateOutput, ...updateFirstNumber})
+            }
         } else {
-            await this.addSecondNumber(buttonName)
-        }
-        await this.addOutputValue(buttonName)
-    }
-
-    async buttonOperationClick(buttonName) {
-        if (this.state.secondNumber !== null) {
-            await this.count(buttonName);
-        } else if (this.state.operation !== null) {
-            await this.setState((state) => (
-                {
-                    output: state.output.substring(0, state.output.length - 1) + buttonName
-                }
-            ));
-        } else {
-            await this.setOperation(buttonName)
-            await this.addOutputValue(buttonName)
+            this.refreshState({...updateOutput, secondNumber: this.state.secondNumber + buttonName})
         }
     }
 
-    async buttonResultClick() {
-        await this.count("=");
+    buttonOperationClick(buttonName) {
+        if (this.state.secondNumber !== "") {
+            this.outResult(buttonName);
+        } else if (this.state.operation !== "") {
+            const newOutput = this.state.output.substring(0, this.state.output.length - 1) + buttonName
+            this.refreshState({operation: buttonName, output: newOutput})
+        } else {
+            this.refreshState({operation: buttonName, output: this.state.output + buttonName})
+        }
+    }
+
+    buttonResultClick() {
+        if (this.state.secondNumber !== "") {
+            this.outResult("=");
+        }
     }
 
     async outsideButtonClick() {
         const response = await fetch("http://localhost:8081/math/expamples?count=5", {
             method: 'GET',
+            mode: "cors",
             headers: {'Content-Type': 'application/json'},
         });
         if (response.ok) {
@@ -70,87 +71,72 @@ class Calculator extends React.Component {
                     }
                 }
                 await this.buttonResultClick()
-                await this.setState({firstNumber: null});
-                await this.setOperation(null)
-                await this.setState({output: ""});
+                await this.refreshState({operation: "", firstNumber: "", output: ""})
             }
         }
     }
 
-    addFirstNumber(number) {
-        this.setState((state) => ({firstNumber: Number(state.firstNumber) + number}));
+    refreshState(stateToRefresh) {
+        this.setState({...stateToRefresh})
     }
 
-    addSecondNumber(number) {
-        this.setState((state) => ({secondNumber: Number(state.secondNumber) + number}));
-    }
+    count(operation) {
 
-    setOperation(operation) {
-        this.setState({operation: operation});
-    }
-
-    setResult(value) {
-        this.setState({result: value});
-
-    }
-
-    addOutputValue(value) {
-        this.setState((state) => ({output: state.output + value}));
-    }
-
-    addHistory() {
-        this.setState((state) => (
-            {
-                history: this.state.history.concat(state.output + "=" + state.result)
-            }
-        ));
-    }
-
-    refreshState(operation) {
-        this.setState((state) => {
-                const commonState = {
-                    firstNumber: state.result,
-                    secondNumber: null,
-                    result: null
-                }
-                if (operation !== "=") {
-                    return {
-                        operation: operation,
-                        output: state.result + operation,
-                        ...commonState
-                    }
-                } else {
-                    return {
-                        output: state.result,
-                        operation: null,
-                        ...commonState
-                    }
-                }
-            }
-        );
-    }
-
-    async count(operation) {
-        switch (this.state.operation) {
+        switch (operation) {
             case "+":
-                await this.setResult(Number(this.state.firstNumber) + Number(this.state.secondNumber))
-                break;
+                return Number(this.state.firstNumber) + Number(this.state.secondNumber);
             case "-":
-                await this.setResult(Number(this.state.firstNumber) - Number(this.state.secondNumber))
-                break;
+                return Number(this.state.firstNumber) - Number(this.state.secondNumber);
             case "*":
-                await this.setResult(Number(this.state.firstNumber) * Number(this.state.secondNumber))
-                break;
+                return Number(this.state.firstNumber) * Number(this.state.secondNumber);
             case "/":
-                if (Number(this.state.secondNumber) === 0) {
-                    await this.setResult("Error division by zero")
-                } else {
-                    await this.setResult(Number(this.state.firstNumber) / Number(this.state.secondNumber))
-                }
-                break;
+                return Number(this.state.firstNumber) / Number(this.state.secondNumber);
+            case "=":
+                return this.count(this.state.operation);
         }
-        await this.addHistory();
-        await this.refreshState(operation);
+    }
+
+    outError(error) {
+        this.refreshState({
+                firstNumber: "",
+                secondNumber: "",
+                result: "",
+                output: error,
+                operation: "",
+                history: this.state.history.concat(this.state.output + "=" + error),
+            }
+        )
+    }
+
+    outResult(operation) {
+        const result = operation === "=" ? this.count(operation) : this.count(this.state.operation);
+
+        if (result === Infinity) {
+            this.outError("Error division by zero")
+        } else {
+            const commonState = {
+                firstNumber: result,
+                secondNumber: "",
+                history: this.state.history.concat(this.state.output + "=" + result),
+                result: result
+            }
+
+            if (operation === "=") {
+                this.refreshState({
+                        output: result,
+                        operation: "",
+                        ...commonState
+                    }
+                )
+            } else {
+                this.refreshState({
+                        output: result.toString() + operation,
+                        operation: operation,
+                        ...commonState
+                    }
+                )
+            }
+        }
     }
 
     render() {
