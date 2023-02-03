@@ -55,7 +55,7 @@ class Calculator extends React.Component {
     }
 
     async outsideButtonClick() {
-        const response = await fetch("http://localhost:8081/math/expamples?count=5", {
+        const response = await fetch("http://localhost:8080/math/expamples?count=5", {
             method: 'GET',
             mode: "cors",
             headers: {'Content-Type': 'application/json'},
