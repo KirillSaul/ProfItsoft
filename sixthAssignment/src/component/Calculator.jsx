@@ -5,6 +5,16 @@ import CalculatorOutput from "./CalculatorOutput";
 import OutsideButton from "./OutsideButton";
 import ButtonOperation from "./ButtonOperation";
 import ButtonResult from "./ButtonResult";
+import {connect} from "react-redux";
+import loadExamples from "../store/action/CalculatorAction";
+
+function mapStateToProps(state) {
+    return {examples: state.examples}
+}
+
+function mapDispatchToProps(dispatch) {
+    return {dispatch}
+}
 
 class Calculator extends React.Component {
     constructor(props) {
@@ -53,26 +63,32 @@ class Calculator extends React.Component {
             this.outResult("=");
         }
     }
+    componentDidUpdate(prevProps, prevState, snapshot)
+    {
+        if (this.props.examples !== prevProps.examples) {
+            this.resultLoaded();
+        }
+    }
 
-    async outsideButtonClick() {
-        const response = await fetch("http://localhost:8080/math/expamples?count=5", {
-            method: 'GET',
-            mode: "cors",
-            headers: {'Content-Type': 'application/json'},
-        });
-        if (response.ok) {
-            const examples = await response.json()
-            for (let example of examples) {
-                for (let symbol of example) {
+    outsideButtonClick() {
+        loadExamples(this.props.dispatch)
+    }
+
+    async resultLoaded()
+    {
+        const examples = await this.props.examples
+        for (let example of examples) {
+            for (let symbol of example) {
+                if (symbol !== " ") {
                     if (symbol >= "0" && symbol <= "9") {
                         await this.buttonNumberClick(symbol)
                     } else {
                         await this.buttonOperationClick(symbol)
                     }
                 }
-                await this.buttonResultClick()
-                await this.refreshState({operation: "", firstNumber: "", output: ""})
             }
+            await this.buttonResultClick()
+            await this.refreshState({operation: "", firstNumber: "", output: ""})
         }
     }
 
@@ -81,7 +97,6 @@ class Calculator extends React.Component {
     }
 
     count(operation) {
-
         switch (operation) {
             case "+":
                 return Number(this.state.firstNumber) + Number(this.state.secondNumber);
@@ -196,4 +211,4 @@ class Calculator extends React.Component {
     }
 }
 
-export default Calculator;
+export default connect(mapStateToProps, mapDispatchToProps)(Calculator);
