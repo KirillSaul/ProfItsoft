@@ -1,19 +1,22 @@
 const initialState = {
+    isLoading: false,
+    isError: false,
     examples: []
-}
-
-function loadExamples() {
-   return fetch("http://localhost:8080/math/examples?count=5", {
-        method: "get",
-        headers: {'Content-Type': 'application/json'}
-    }).then(value => value.json())
-
 }
 
 function reducer(state = initialState, action) {
     switch (action.type) {
         case "LOAD_EXAMPLES":
-            return  {examples:loadExamples()}
+            return {
+                ...state,
+                examples: action.examples,
+                isLoading: false
+            }
+        case "LOADING_EXAMPLES":
+            return {...state,
+                isLoading: true}
+        case "ERROR_LOAD":
+            return {...state,isError: true}
         default:
             return state;
     }

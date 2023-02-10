@@ -3,8 +3,6 @@ import { Provider } from 'react-redux';
 import reducer from "./store/reducer/Reducer";
 import Calculator from "./component/Calculator";
 
-
-
 const store = createStore(reducer)
 const App = () =>{
     return (

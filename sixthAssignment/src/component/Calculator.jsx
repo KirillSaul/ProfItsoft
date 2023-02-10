@@ -6,10 +6,14 @@ import OutsideButton from "./OutsideButton";
 import ButtonOperation from "./ButtonOperation";
 import ButtonResult from "./ButtonResult";
 import {connect} from "react-redux";
-import loadExamples from "../store/action/CalculatorAction";
+import {getExamples} from "../store/action/CalculatorAction";
 
 function mapStateToProps(state) {
-    return {examples: state.examples}
+    return {
+        examples: state.examples,
+        isLoading: state.isLoading,
+        isError: state.isError
+    }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -19,7 +23,6 @@ function mapDispatchToProps(dispatch) {
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
-        this.outsideButtonClick = this.outsideButtonClick.bind(this);
         this.buttonNumberClick = this.buttonNumberClick.bind(this);
         this.buttonOperationClick = this.buttonOperationClick.bind(this);
         this.buttonResultClick = this.buttonResultClick.bind(this);
@@ -63,20 +66,21 @@ class Calculator extends React.Component {
             this.outResult("=");
         }
     }
-    componentDidUpdate(prevProps, prevState, snapshot)
-    {
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.examples !== prevProps.examples) {
             this.resultLoaded();
         }
+        if (this.props.isLoading !== prevProps.isLoading) {
+            this.props.isLoading === true ? this.setState({output: "loading..."}) : this.setState({output: ""});
+        }
+        if (this.props.isError !== prevProps.isError) {
+            this.props.isError === true ? this.setState({output: "Error"}) : this.setState({output: ""});
+        }
     }
 
-    outsideButtonClick() {
-        loadExamples(this.props.dispatch)
-    }
-
-    async resultLoaded()
-    {
-        const examples = await this.props.examples
+    async resultLoaded() {
+        const examples = this.props.examples
         for (let example of examples) {
             for (let symbol of example) {
                 if (symbol !== " ") {
@@ -174,9 +178,12 @@ class Calculator extends React.Component {
                     )
                 }
             </div>
+
             <Grid>
                 <CalculatorOutput output={this.state.output}></CalculatorOutput>
             </Grid>
+
+
             <Grid>
                 <ButtonOperation buttonName="+" onClick={this.buttonOperationClick}/>
                 <ButtonOperation buttonName="-" onClick={this.buttonOperationClick}/>
@@ -204,7 +211,7 @@ class Calculator extends React.Component {
             </Grid>
             <Grid>
                 <Box mt={3}>
-                    <OutsideButton buttonName="Получить и решить примеры" onClick={this.outsideButtonClick}/>
+                    <OutsideButton buttonName="Получить и решить примеры" onClick={()=> getExamples(this.props.dispatch)}/>
                 </Box>
             </Grid>
         </div>
