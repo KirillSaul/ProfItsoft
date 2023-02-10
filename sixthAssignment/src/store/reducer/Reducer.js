@@ -16,7 +16,7 @@ function reducer(state = initialState, action) {
             return {...state,
                 isLoading: true}
         case "ERROR_LOAD":
-            return {...state,isError: true}
+            return {...state,isLoading: false,isError: true}
         default:
             return state;
     }

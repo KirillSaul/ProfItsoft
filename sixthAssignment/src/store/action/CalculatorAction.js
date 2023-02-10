@@ -12,7 +12,7 @@ export const getExamples = (dispatch) => {
             method: "get",
             headers: {'Content-Type': 'application/json'}
         }).then(value => value.json().then((value) => dispatch(loadExamples(value))))
-            .catch(() => dispatch(errorLoad))
+            .catch(() => dispatch(errorLoad()))
     }, 2000)
 
 
