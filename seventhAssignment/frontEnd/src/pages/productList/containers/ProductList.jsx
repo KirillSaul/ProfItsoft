@@ -17,13 +17,12 @@ const ProductList = ({authorities}) => {
     }, [])
 
     const products = useSelector((state) => {
-        console.log("lol"+state.reducer.products);
         return state.reducer.products
     })
 
     useEffect(() => {
-        console.log(products);
-        setProductList((prevState) => ([...prevState, products]));
+        console.log(...products);
+        setProductList((prevState) => ([...prevState, ...products]));
     }, [products])
 
 
@@ -43,7 +42,7 @@ const ProductList = ({authorities}) => {
                                     Edit
                                 </Button>
                             </Link>
-                            <Button variant="contained" color="secondary" onClick={()=>productActions.deleteProductById(value.id)}>
+                            <Button variant="contained" color="secondary" onClick={()=>dispatch(productActions.deleteProductById(value.id))}>
                                 Delete
                             </Button>
 

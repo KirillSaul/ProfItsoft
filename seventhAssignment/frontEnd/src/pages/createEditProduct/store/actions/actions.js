@@ -31,7 +31,7 @@ const putProduct = (product)=>(dispatch)=>
     return  putJson({
         body: product,
         url: "http://localhost:8081/product"
-    }).then(product => {dispatch(getProductById(product.id))})
+    }).then(window.location.href = (`/productList`))
         .catch(() => dispatch(errorLoad()))
 }
 

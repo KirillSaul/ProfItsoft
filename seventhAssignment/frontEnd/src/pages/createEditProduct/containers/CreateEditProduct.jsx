@@ -34,11 +34,14 @@ const CreateEditProduct = ({authorities}) => {
 
     return (
         <div>
+            <div>name:</div>
             <div>
+
                 <TextField value={newProduct.name !== null ? newProduct.name : ""} onChange={(e) => {
                     setNewProduct((prevState) => ({...prevState, name: e.target.value}))
                 }}></TextField>
             </div>
+            <div>categoryId:</div>
             <div>
                 <TextField value={newProduct.categoryId !== null ? newProduct.categoryId : ""} onChange={(e) => {
                     setNewProduct((prevState) => ({...prevState, categoryId: e.target.value}))

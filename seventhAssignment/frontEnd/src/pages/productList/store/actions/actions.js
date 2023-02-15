@@ -8,7 +8,7 @@ const receiveProduct = (product) => (
 )
 
 const getProducts = () => (dispatch) => {
-    dispatch(loadingExamples())
+    dispatch(loadingProducts())
     postJson({
         body: {
             page: 0,
@@ -25,13 +25,11 @@ const deleteProductById = (productId) => (dispatch) => {
     deleteJson({
         body: {},
         url: "http://localhost:8081/product/" + productId
-    }).then(() => {
-        window.location.href = (`/productList`)
-    })
+    }).then(window.location.href = (`/productList`))
         .catch(() => dispatch(errorLoad()))
 }
 
-const loadingExamples = () => (
+const loadingProducts = () => (
     {
         type: "LOADING_PRODUCTS"
     }
