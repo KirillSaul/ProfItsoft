@@ -40,4 +40,4 @@ const errorLoad = () => (
         type: "ERROR_LOAD"
     }
 )
-export default {getProducts,deleteProductById}
+export default {getProducts, deleteProductById}

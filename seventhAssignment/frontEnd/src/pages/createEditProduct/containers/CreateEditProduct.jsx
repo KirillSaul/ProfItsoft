@@ -10,9 +10,9 @@ import categoryActions from "../store/actions/categoryActions";
 
 const CreateEditProduct = ({authorities}) => {
     const canSeeList = useAccessValidate({
-    ownedAuthorities: authorities,
-    neededAuthorities: ['МОЖНО_ВОТ_ЭТУ_ШТУКУ'],
-});
+        ownedAuthorities: authorities,
+        neededAuthorities: ['МОЖНО_ВОТ_ЭТУ_ШТУКУ'],
+    });
     const initialStateProduct = {id: null, name: null, categoryId: null}
     const [newProduct, setNewProduct] = useState(initialStateProduct);
     const [newCategories, setNewCategories] = useState([]);
@@ -23,13 +23,14 @@ const CreateEditProduct = ({authorities}) => {
         if (productId !== undefined) {
             dispatch(productActions.getProductById(productId))
         }
-            dispatch(categoryActions.getCategories())
+        dispatch(categoryActions.getCategories())
     }, [])
 
     const product = useSelector((state) => {
-     return state.productReducer.product})
+        return state.productReducer.product
+    })
 
-    const categories = useSelector((state)=>{
+    const categories = useSelector((state) => {
         return state.categoryReducer.categories;
     })
 
@@ -39,8 +40,7 @@ const CreateEditProduct = ({authorities}) => {
 
     useEffect(() => {
         setNewCategories((prevState) => ([...prevState, ...categories]));
-        if(newProduct.categoryId === null && categories.length !== 0)
-        {
+        if (newProduct.categoryId === null && categories.length !== 0) {
             setNewProduct((prevState) => ({...prevState, categoryId: categories[0].id}));
         }
     }, [categories])
@@ -51,10 +51,12 @@ const CreateEditProduct = ({authorities}) => {
             {canSeeList &&
                 <div>
                     <div>
-
-                        <TextField label="Name:" value={newProduct.name !== null ? newProduct.name : ""} onChange={(e) => {
-                            setNewProduct((prevState) => ({...prevState, name: e.target.value}))
-                        }}></TextField>
+                        <TextField label="Name:" value={newProduct.name !== null ? newProduct.name : ""}
+                                   onChange={
+                                       (e) => {
+                                           setNewProduct((prevState) => ({...prevState, name: e.target.value}))
+                                       }}>
+                        </TextField>
                     </div>
                     <div>
 
@@ -62,7 +64,11 @@ const CreateEditProduct = ({authorities}) => {
                             id="standard-select-currency"
                             select
                             label="Category:"
-                             value={newProduct.categoryId !== null ? newProduct.categoryId : newCategories.length !== 0 ? newCategories[0].id : ""}
+                            value={newProduct.categoryId !== null
+                                ? newProduct.categoryId
+                                : newCategories.length !== 0
+                                    ? newCategories[0].id
+                                    : ""}
                             onChange={(e) => {
                                 setNewProduct((prevState) => ({...prevState, categoryId: e.target.value}))
                             }}
@@ -76,7 +82,9 @@ const CreateEditProduct = ({authorities}) => {
                         </TextField>
                     </div>
                     <Button onClick={() => {
-                        productId === undefined ? dispatch(productActions.postProduct(newProduct)) : dispatch(productActions.putProduct(newProduct))
+                        productId === undefined
+                            ? dispatch(productActions.postProduct(newProduct))
+                            : dispatch(productActions.putProduct(newProduct))
                     }}>Save</Button>
                 </div>}
         </div>

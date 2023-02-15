@@ -37,18 +37,18 @@ const ProductList = ({authorities}) => {
                         Create
                     </Button>
                     <div> {
-                        productList.map(value =>
+                        productList.map(product =>
                             (
                                 <Grid>
                                     <Box sx={{m: 2}}/>
-                                    {value.name}
-                                    <Link to={"/createEditProduct/" + value.id}>
+                                    {product.name}
+                                    <Link to={"/createEditProduct/" + product.id}>
                                         <Button variant="contained" color="primary">
                                             Edit
                                         </Button>
                                     </Link>
                                     <Button variant="contained" color="secondary"
-                                            onClick={() => dispatch(productActions.deleteProductById(value.id))}>
+                                            onClick={() => dispatch(productActions.deleteProductById(product.id))}>
                                         Delete
                                     </Button>
                                 </Grid>

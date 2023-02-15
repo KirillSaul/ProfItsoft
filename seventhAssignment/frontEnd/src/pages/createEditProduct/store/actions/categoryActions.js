@@ -14,8 +14,7 @@ const getCategories = () => (dispatch) => {
         url: "http://localhost:8081/category"
     }).then(categories => {
         dispatch(receiveCategories(categories))
-    })
-        .catch(() => dispatch(errorLoad()))
+    }).catch(() => dispatch(errorLoad()))
 }
 
 const loadingCategories = () => (
