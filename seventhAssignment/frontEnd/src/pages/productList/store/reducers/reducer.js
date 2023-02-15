@@ -1,22 +1,18 @@
 const initialState = {
+    products: [],
     isLoading: false,
-    isError: false,
-    product: {
-        id: null,
-        name: null,
-        categoryId: null
-    }
+    isError: false
 };
 
 export default (state = initialState, {type, payload}) => {
     switch (type) {
-        case "RECEIVE_PRODUCT":
+        case "RECEIVE_PRODUCTS":
             return {
                 ...state,
-                product: {...payload},
+                products: [...payload],
                 isLoading: false
             }
-        case "LOADING_PRODUCT":
+        case "LOADING_PRODUCTS":
             return {
                 ...state,
                 isLoading: true

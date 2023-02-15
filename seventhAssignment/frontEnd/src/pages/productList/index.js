@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import withAuthorities from 'decorators/withAuthorities';
 import ProductList from './containers/ProductList';
-import reducer from './reducers/reducer';
+import reducer from './store/reducers/reducer';
 
 const rootReducer = combineReducers({
     reducer,

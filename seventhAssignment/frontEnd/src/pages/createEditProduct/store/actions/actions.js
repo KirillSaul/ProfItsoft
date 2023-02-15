@@ -1,29 +1,49 @@
-import {getJson} from "../../../../requests";
+import {getJson, postJson, putJson} from "../../../../requests";
 
-export const loadProduct = (product) => (
+const receiveProduct = (product) => (
     {
-        type: "LOAD_EXAMPLES",
+        type: "RECEIVE_PRODUCT",
         payload: product
     }
 )
 
-export const getProductById = (productId)=>(dispatch) => {
+const getProductById = (productId)=>(dispatch) => {
     dispatch(loadingExamples())
     return  getJson({
             body: {},
             url: "http://localhost:8081/product/" + productId
-        }).then(product => {dispatch(loadProduct(product))}) //setProduct(value)
+        }).then(product => {dispatch(receiveProduct(product))})
             .catch(() => dispatch(errorLoad()))
 }
 
-export const loadingExamples = () => (
+const postProduct = (product)=>(dispatch)=>
+{
+    return  postJson({
+        body: product,
+        url: "http://localhost:8081/product",
+        redirect:"manual"
+    }).then(() => {window.location.href = (`/productList`)})
+        .catch(() => dispatch(errorLoad()))
+}
+
+const putProduct = (product)=>(dispatch)=>
+{
+    return  putJson({
+        body: product,
+        url: "http://localhost:8081/product"
+    }).then(product => {dispatch(getProductById(product.id))})
+        .catch(() => dispatch(errorLoad()))
+}
+
+const loadingExamples = () => (
     {
-        type: "LOADING_EXAMPLES"
+        type: "LOADING_PRODUCT"
     }
 )
 
-export const errorLoad = () => (
+const errorLoad = () => (
     {
         type: "ERROR_LOAD"
     }
 )
+export default {getProductById, postProduct, putProduct}

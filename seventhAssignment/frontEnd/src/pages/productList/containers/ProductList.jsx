@@ -3,20 +3,29 @@ import {useState} from "react";
 import Button from 'components/Button';
 import Box from 'components/Box';
 import Grid from 'components/Grid';
+import Link from 'components/Link'
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import productActions from "../../productList/store/actions/actions";
 
 const ProductList = ({authorities}) => {
     const [productList, setProductList] = useState([]);
-    const getProductList = () => {
-        postJson({
-            body: {
-                productName: "product",
-                page: 0,
-                pageSize: 10
-            },
-            url: "http://localhost:8081/product/_filter"
-        }).then(value => setProductList(value.content))
-    }
-    getProductList();
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(productActions.getProducts())
+    }, [])
+
+    const products = useSelector((state) => {
+        console.log("lol"+state.reducer.products);
+        return state.reducer.products
+    })
+
+    useEffect(() => {
+        console.log(products);
+        setProductList((prevState) => ([...prevState, products]));
+    }, [products])
+
 
     return (
         <div>
@@ -29,11 +38,12 @@ const ProductList = ({authorities}) => {
                         <Grid>
                             <Box sx={{m: 2}}/>
                             {value.name}
-
-                            <Button variant="contained" color="primary" href={"/createEditProduct/" + value.id}>
-                                Edit
-                            </Button>
-                            <Button variant="contained" color="secondary">
+                            <Link to={"/createEditProduct/" + value.id }>
+                                <Button variant="contained" color="primary">
+                                    Edit
+                                </Button>
+                            </Link>
+                            <Button variant="contained" color="secondary" onClick={()=>productActions.deleteProductById(value.id)}>
                                 Delete
                             </Button>
 

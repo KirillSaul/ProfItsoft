@@ -44,10 +44,13 @@ const App = () => {
               <Route path={`/${PAGES.INITIAL}`}>
                 <PageInitial />
               </Route>
-              <Route path={"/productList"}>
+              <Route path={`/${PAGES.PRODUCT_LIST}`}>
              <ProductList></ProductList>
               </Route>
-              <Route path={"/createEditProduct"}>
+              <Route path={`/${PAGES.CREATE_EDIT_PRODUCT}/:productId`}>
+                <CreateEditProduct></CreateEditProduct>
+              </Route>
+              <Route path={`/${PAGES.CREATE_EDIT_PRODUCT}`}>
                 <CreateEditProduct></CreateEditProduct>
               </Route>
               <Redirect from="*" to={`/${PAGES.INITIAL}`} />

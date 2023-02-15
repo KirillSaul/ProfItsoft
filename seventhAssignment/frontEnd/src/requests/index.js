@@ -34,6 +34,31 @@ const fetchPost = ({ body, params = {}, url }) => {
   );
 };
 
+const fetchPut = ({ body, params = {}, url }) => {
+    url = new URL(url);
+    url.search = new URLSearchParams(params).toString();
+
+    return fetch(
+        url,
+        {
+            body: JSON.stringify(body),
+            headers: getHeaders(),
+            method: 'PUT',
+        }
+    );
+};
+
+const fetchDelete = ({ params = {}, url }) => {
+    url = new URL(url);
+    url.search = new URLSearchParams(params).toString();
+    return fetch(
+        url,
+        {
+            headers: getHeaders(),
+            method: 'DELETE',
+        }
+    );
+};
 
 export const getJson = ({
   params,
@@ -66,3 +91,36 @@ export const postJson = ({
     throw response;
   });
 };
+
+export const putJson = ({
+    body,
+    params,
+    url,
+}) => {
+    return fetchPut({
+        body,
+        params,
+        url,
+    }).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw response;
+    });
+};
+
+export const deleteJson = ({
+                            params,
+                            url,
+                        }) => {
+    return fetchDelete({
+        params,
+        url,
+    }).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw response;
+    });
+};
+

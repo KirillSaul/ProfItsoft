@@ -1,44 +1,52 @@
 import {getJson, postJson} from "../../../requests";
 import {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import Button from 'components/Button';
 import Box from 'components/Box';
 import Grid from 'components/Grid';
 import InputName from "./components/InputName";
 import TextField from "components/TextField";
 import {useDispatch, useSelector} from "react-redux";
-import {getProductById} from "../store/actions/actions";
+import productActions from "../store/actions/actions";
 
 const CreateEditProduct = ({authorities}) => {
-  //  const [product, setProduct] = useState({});
-    const productIdUrl = useLocation().pathname.substring(useLocation().pathname.lastIndexOf("/"))
-    // if (productIdUrl.length >= 2) {
-    //     const getProduct = () => {
-    //         getJson({
-    //             body: {},
-    //             url: "http://localhost:8081/product" + productIdUrl
-    //         }).then(value => setProduct(value))
-    //     }
-    //     getProduct();
-    // }
+    const initialState = {id: null, name: null, categoryId: null}
+    const [newProduct, setNewProduct] = useState(initialState);
+
 
     const dispatch = useDispatch();
-    const product = useSelector((reducer)=>   reducer)
-    getProductById(2)(dispatch)
-    console.log(product)
-    // const prod = useSelector(state => state.product)
-    // console.log(prod)
+
+
+    const {productId} = useParams()
+    useEffect(() => {
+        if (productId !== undefined) {
+            dispatch(productActions.getProductById(productId))
+        }
+
+    }, [])
+
+    const product = useSelector((state) => {
+        return state.reducer.product
+    })
+    useEffect(() => {
+        setNewProduct((prevState) => ({...prevState, ...product}));
+    }, [product])
+
     return (
         <div>
-            {/*{product.name}*/}
             <div>
-                {/*<TextField defaultValue={product.name}></TextField>*/}
-                {/*{*/}
-                {/*    if productIdUrl.length >= 2 &&*/}
-                {/*    product.name*/}
-
-                {/*}*/}
+                <TextField value={newProduct.name !== null ? newProduct.name : ""} onChange={(e) => {
+                    setNewProduct((prevState) => ({...prevState, name: e.target.value}))
+                }}></TextField>
             </div>
+            <div>
+                <TextField value={newProduct.categoryId !== null ? newProduct.categoryId : ""} onChange={(e) => {
+                    setNewProduct((prevState) => ({...prevState, categoryId: e.target.value}))
+                }}></TextField>
+            </div>
+            <Button onClick={() => {
+                productId === undefined? dispatch(productActions.postProduct(newProduct)): dispatch(productActions.putProduct(newProduct))
+            }}>Save</Button>
         </div>
     )
 
