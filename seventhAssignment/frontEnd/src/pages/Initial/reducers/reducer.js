@@ -4,7 +4,6 @@ const initialState = {
     'somePath',
     'Картинка',
     'anotherPath',
-    undefined,
     "productList",
   ],
 

@@ -37,6 +37,10 @@ const putProduct = (product) => (dispatch) => {
         .catch(() => dispatch(errorLoad()))
 }
 
+const setProductIsCreating = ()=>(dispatch) => {
+    dispatch(creatingProduct())
+}
+
 const loadingProduct = () => (
     {
         type: "LOADING_PRODUCT"
@@ -48,4 +52,11 @@ const errorLoad = () => (
         type: "ERROR_LOAD"
     }
 )
-export default {getProductById, postProduct, putProduct}
+
+const creatingProduct = () => (
+    {
+        type: "CREATING_PRODUCT"
+    }
+)
+
+export default {getProductById, postProduct, putProduct,setProductIsCreating}

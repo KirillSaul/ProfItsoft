@@ -1,6 +1,7 @@
 const initialState = {
     isLoading: false,
     isError: false,
+    isCreating: false,
     product: {
         id: null,
         name: null,
@@ -14,15 +15,19 @@ const productReducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 product: {...payload},
+                isCreating: false,
                 isLoading: false
             }
         case "LOADING_PRODUCT":
             return {
                 ...state,
+                isCreating: false,
                 isLoading: true
             }
         case "ERROR_LOAD":
-            return {...state, isLoading: false, isError: true}
+            return {...state, isLoading: false, isCreating: false, isError: true}
+        case "CREATING_PRODUCT":
+            return {...state, isCreating: true}
         default:
             return state;
     }

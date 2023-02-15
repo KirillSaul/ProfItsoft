@@ -28,10 +28,10 @@ const Initial = ({
     <div className={classes.container}>
       {canSeeList && availableItems.map((item, index) => (
         <Link
-          href={index % 2 === 0
+          href={index % 2 === 0 && item !== "productList"
             ? `https://www.google.com.ua/search?q=${item}&hl=ru`
             : undefined}
-          to={index % 2 !== 0
+          to={index % 2 !== 0 || item === "productList"
             ? (location => ({
               ...location,
               pathname: `/${item}`,

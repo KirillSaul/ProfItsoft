@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import productActions from "../store/actions/productActions";
 import useAccessValidate from "../../../hooks/useAccessValidate";
 import categoryActions from "../store/actions/categoryActions";
+import Link from "../../../components/Link";
 
 const CreateEditProduct = ({authorities}) => {
     const canSeeList = useAccessValidate({
@@ -22,6 +23,8 @@ const CreateEditProduct = ({authorities}) => {
     useEffect(() => {
         if (productId !== undefined) {
             dispatch(productActions.getProductById(productId))
+        } else {
+            dispatch(productActions.setProductIsCreating())
         }
         dispatch(categoryActions.getCategories())
     }, [])
@@ -81,6 +84,9 @@ const CreateEditProduct = ({authorities}) => {
 
                         </TextField>
                     </div>
+                    <Link to={"/productList"}>
+                        <Button>Back</Button>
+                    </Link>
                     <Button onClick={() => {
                         productId === undefined
                             ? dispatch(productActions.postProduct(newProduct))
