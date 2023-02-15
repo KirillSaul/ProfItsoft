@@ -25,8 +25,7 @@ const ProductList = ({authorities}) => {
     })
 
     useEffect(() => {
-        console.log(...products);
-        setProductList((prevState) => ([...prevState, ...products]));
+        setProductList(() => ([...products]));
     }, [products])
 
 

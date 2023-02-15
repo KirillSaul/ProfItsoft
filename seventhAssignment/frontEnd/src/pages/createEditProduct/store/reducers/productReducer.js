@@ -8,7 +8,7 @@ const initialState = {
     }
 };
 
-export default (state = initialState, {type, payload}) => {
+const productReducer = (state = initialState, {type, payload}) => {
     switch (type) {
         case "RECEIVE_PRODUCT":
             return {
@@ -27,3 +27,4 @@ export default (state = initialState, {type, payload}) => {
             return state;
     }
 }
+export default productReducer

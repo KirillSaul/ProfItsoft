@@ -8,7 +8,7 @@ const receiveProduct = (product) => (
 )
 
 const getProductById = (productId)=>(dispatch) => {
-    dispatch(loadingExamples())
+    dispatch(loadingProduct())
     return  getJson({
             body: {},
             url: "http://localhost:8081/product/" + productId
@@ -35,7 +35,7 @@ const putProduct = (product)=>(dispatch)=>
         .catch(() => dispatch(errorLoad()))
 }
 
-const loadingExamples = () => (
+const loadingProduct = () => (
     {
         type: "LOADING_PRODUCT"
     }

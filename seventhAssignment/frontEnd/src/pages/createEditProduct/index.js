@@ -3,11 +3,12 @@ import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import withAuthorities from 'decorators/withAuthorities';
-import reducer from './store/reducers/reducer';
+import productReducer from './store/reducers/productReducer';
+import categoryReducer from "./store/reducers/categoryReducer";
 import CreateEditProduct from "./containers/CreateEditProduct";
 
 const rootReducer = combineReducers({
-    reducer,
+    productReducer,categoryReducer
 });
 const store = createStore(
     rootReducer,
