@@ -8,7 +8,7 @@ import productActions from "../../productList/store/actions/actions";
 import useAccessValidate from "../../../hooks/useAccessValidate";
 
 const ProductList = ({authorities}) => {
-    const [productList, setProductList] = useState([]);
+    const [newProducts, setNewProducts] = useState([]);
 
     const canSeeList = useAccessValidate({
         ownedAuthorities: authorities,
@@ -25,9 +25,15 @@ const ProductList = ({authorities}) => {
     })
 
     useEffect(() => {
-        setProductList(() => ([...products]));
+        setNewProducts(()=>[...products]);
     }, [products])
 
+    useEffect(() => {
+
+        console.log(products)
+        console.log("new: ")
+        console.log(newProducts)
+    }, [newProducts])
 
     return (
         <div>
@@ -37,7 +43,7 @@ const ProductList = ({authorities}) => {
                         Create
                     </Button>
                     <div> {
-                        productList.map(product =>
+                        newProducts.map(product =>
                             (
                                 <Grid>
                                     <Box sx={{m: 2}}/>

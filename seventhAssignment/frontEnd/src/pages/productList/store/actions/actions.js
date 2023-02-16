@@ -25,7 +25,7 @@ const deleteProductById = (productId) => (dispatch) => {
     deleteJson({
         body: {},
         url: "http://localhost:8081/product/" + productId
-    }).then(window.location.href = (`/productList`))
+    }).then(status=> dispatch(getProducts()))
         .catch(() => dispatch(errorLoad()))
 }
 

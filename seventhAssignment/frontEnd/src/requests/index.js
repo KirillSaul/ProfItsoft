@@ -110,15 +110,15 @@ export const putJson = ({
 };
 
 export const deleteJson = ({
-                            params,
-                            url,
-                        }) => {
+    params,
+    url,
+}) => {
     return fetchDelete({
         params,
         url,
     }).then((response) => {
         if (response.ok) {
-            return response.json();
+            return response.status;
         }
         throw response;
     });

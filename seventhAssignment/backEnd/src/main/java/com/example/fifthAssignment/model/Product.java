@@ -17,7 +17,7 @@ public class Product {
 
     private String name;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 

@@ -42,7 +42,7 @@ const CreateEditProduct = ({authorities}) => {
     }, [product])
 
     useEffect(() => {
-        setNewCategories((prevState) => ([...prevState, ...categories]));
+        setNewCategories((prevState) => ([...categories]));
         if (newProduct.categoryId === null && categories.length !== 0) {
             setNewProduct((prevState) => ({...prevState, categoryId: categories[0].id}));
         }
